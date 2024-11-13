@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Navbar Example</title>
+  <!-- Bootstrap CSS (via CDN) -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Chart.js (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="/">My Customer Count</a>
+    <!-- Toggle button for mobile navigation -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/services.html">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/download-csv">Download CSV</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h2>Data Graf!</h2>
+
+    <!-- Graph Canvas -->
+    <div id="chartContainer" class="card p-4 shadow">
+      <canvas id="dateCountsChart"></canvas>
+    </div>
+
+  </div>
+
+  <script>
+     async function fetchDateCounts() {
+      try {
+        // Replace <ESP32_IP> with the actual IP address of your ESP32
+        const response = await fetch("/get-data");
+
+        if (!response.ok) throw new Error("Failed to fetch data");
+
+        const data = await response.json();
+        console.log("-----------DATA--------")
+        console.log(data);
+        console.log("-----------------------")
+        renderChart(data);
+      } catch (error) {
+        console.error("Error fetching date counts:", error);
+        alert("No data was available. Try Again later.");
+      }
+    }
+
+    function renderChart(data) {
+        // Extract dates and counts from the JSON data
+        const dates = Object.keys(data);
+        const counts = Object.values(data);
+        console.log("Dates:", dates);
+        console.log("Counts:", counts);
+
+        // Create a bar chart using Chart.js
+        const ctx = document.getElementById("dateCountsChart").getContext("2d");
+        
+            // Ensure that there are valid labels (dates) and data (counts)
+        if (dates.length && counts.length) {
+            new Chart(ctx, {
+                type: "bar", // Bar chart type
+                data: {
+                    labels: dates, // X-axis labels (dates)
+                    datasets: [{
+                        label: "Counts per Day", // The label for the dataset
+                        data: counts, // Y-axis values (counts)
+                        backgroundColor: "rgba(75, 192, 192, 0.5)", // Bar color
+                        borderColor: "rgba(75, 192, 192, 1)", // Bar border color
+                        borderWidth: 1 // Border width for the bars
+                    }]
+                },
+                options: {
+                    responsive: true, // Make chart responsive to screen size
+                    scales: {
+                        y: {
+                            beginAtZero: true, // Start the Y-axis at zero
+                            title: {
+                                display: true,
+                                text: "Count" // Y-axis label
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Date" // X-axis label
+                            },
+                            ticks: {
+                                autoSkip: true, // Skip some ticks if there are too many
+                                maxRotation: 45, // Rotate labels to avoid overlap
+                                minRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+        } 
+        else {
+                console.error("Invalid data: The dates or counts are empty.");
+        }
+    }
+
+    // Fetch and render data when the page loads
+    window.onload = fetchDateCounts;
+  </script>
+
+  <!-- Bootstrap JS and dependencies (via CDN) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

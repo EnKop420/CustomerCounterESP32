@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services</title>
+  <!-- Bootstrap CSS (via CDN) -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="container mt-4">
+    <h1>Our Services</h1>
+    <p>Choose a service below to send a request to the server.</p>
+    <a href="/">Home</a>
+  </div>
+
+  <!-- Service Buttons -->
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 col-sm-6 my-2">
+        <button class="btn btn-primary btn-block" onclick="sendRequest('/add-value', 'POST')">+</button>
+      </div>
+      <div class="col-12 col-sm-6 my-2">
+        <button class="btn btn-primary btn-block" onclick="sendRequest('/remove-value', 'DELETE')">-</button>
+      </div>
+      <div class="col-12 col-sm-6 my-2">
+        <button class="btn btn-primary btn-block" onclick="sendRequest('/clear-csv', 'DELETE')">Clear CSV</button>
+      </div>
+      <div class="col-12 col-sm-6 my-2">
+        <button class="btn btn-primary btn-block" onclick="sendRequest('/clear-for-today', 'DELETE')">Clear List for Today</button>
+      </div>
+      <div class="col-12 col-sm-6 my-2">
+        <button class="btn btn-primary btn-block" onclick="sendRequest('/clear-wifi', 'DELETE')">Clear Wifi Config</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript function to send requests -->
+  <script>
+    function sendRequest(serviceUrl, method = "POST") {
+      // Define options for fetch request, setting the method dynamically
+      const options = {
+        method: method, // Set request method (POST or DELETE)
+        headers: {
+          "Content-Type": "text/plain" // Define content type if payload is provided
+        }
+      };
+
+      // Make the fetch request
+      fetch(serviceUrl, options)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Server error: ${response.status} ${response.statusText}`);
+          }
+          return response.text();
+        })
+        .then(data => {
+          if (!data) {
+            throw new Error("No response retrieved from server.");
+          }
+          alert("Response from server: " + data);
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    }
+  </script>
+
+  <!-- Bootstrap JS and dependencies (via CDN) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
