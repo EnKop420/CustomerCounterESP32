@@ -145,7 +145,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:acd7cf3c92a013e8e64c45ecd35fe8f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the time in "hh:mm" format.  <br /></td></tr>
 <tr class="separator:acd7cf3c92a013e8e64c45ecd35fe8f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a671612927e3585fc4bf3d9b856c2c9dc" id="r_a671612927e3585fc4bf3d9b856c2c9dc"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a671612927e3585fc4bf3d9b856c2c9dc">getDate</a> (tm timeInfo)</td></tr>
-<tr class="memdesc:a671612927e3585fc4bf3d9b856c2c9dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the date in "dd/mm/yyyy" format.  <br /></td></tr>
+<tr class="memdesc:a671612927e3585fc4bf3d9b856c2c9dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the date in "yyyy/mm/dd" format.  <br /></td></tr>
 <tr class="separator:a671612927e3585fc4bf3d9b856c2c9dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12438a18dec9b05f1399e1410b521efc" id="r_a12438a18dec9b05f1399e1410b521efc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12438a18dec9b05f1399e1410b521efc">onTouch</a> ()</td></tr>
 <tr class="memdesc:a12438a18dec9b05f1399e1410b521efc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles touch event and appends the current date and time to the CSV file.  <br /></td></tr>
@@ -407,7 +407,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the date in "dd/mm/yyyy" format. </p>
+<p>Returns the date in "yyyy/mm/dd" format. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">timeInfo</td><td>The date information. </td></tr>
@@ -419,8 +419,8 @@ Variables</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="main_8cpp_source.html#l00483">483</a> of file <a class="el" href="main_8cpp_source.html">main.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  483</span>                           {</div>
 <div class="line"><span class="lineno">  484</span>  <span class="comment">// Format date as dd/mm/yyyy</span></div>
-<div class="line"><span class="lineno">  485</span>  <span class="keywordtype">char</span> dateStr[11];  <span class="comment">// Format requires 10 characters (dd/mm/yyyy + null terminator)</span></div>
-<div class="line"><span class="lineno">  486</span>  strftime(dateStr, <span class="keyword">sizeof</span>(dateStr), <span class="stringliteral">&quot;%d/%m/%Y&quot;</span>, &amp;timeInfo);</div>
+<div class="line"><span class="lineno">  485</span>  <span class="keywordtype">char</span> dateStr[11];  <span class="comment">// Format requires 10 characters (yyyy/mm/dd + null terminator)</span></div>
+<div class="line"><span class="lineno">  486</span>  strftime(dateStr, <span class="keyword">sizeof</span>(dateStr), <span class="stringliteral">&quot;%Y/%m/%d&quot;</span>, &amp;timeInfo);</div>
 <div class="line"><span class="lineno">  487</span>  String date = String(dateStr);</div>
 <div class="line"><span class="lineno">  488</span> </div>
 <div class="line"><span class="lineno">  489</span>  <span class="keywordflow">return</span> date;</div>
@@ -629,7 +629,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  508</span> </div>
 <div class="line"><span class="lineno">  509</span>  <a class="code hl_function" href="#ae1bc6ee0bf39efb79c46ad44e1c67fc2">appendToCSV</a>(<a class="code hl_variable" href="#a8b056699cf1110a1f8807d0288caa08b">csvPath</a>, date, time);  <span class="comment">// Save date and time to CSV</span></div>
 <div class="line"><span class="lineno">  510</span>}</div>
-<div class="ttc" id="amain_8cpp_html_a671612927e3585fc4bf3d9b856c2c9dc"><div class="ttname"><a href="#a671612927e3585fc4bf3d9b856c2c9dc">getDate</a></div><div class="ttdeci">String getDate(tm timeInfo)</div><div class="ttdoc">Returns the date in &quot;dd/mm/yyyy&quot; format.</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00483">main.cpp:483</a></div></div>
+<div class="ttc" id="amain_8cpp_html_a671612927e3585fc4bf3d9b856c2c9dc"><div class="ttname"><a href="#a671612927e3585fc4bf3d9b856c2c9dc">getDate</a></div><div class="ttdeci">String getDate(tm timeInfo)</div><div class="ttdoc">Returns the date in &quot;yyyy/mm/dd&quot; format.</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00483">main.cpp:483</a></div></div>
 <div class="ttc" id="amain_8cpp_html_a8b056699cf1110a1f8807d0288caa08b"><div class="ttname"><a href="#a8b056699cf1110a1f8807d0288caa08b">csvPath</a></div><div class="ttdeci">const char * csvPath</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00078">main.cpp:78</a></div></div>
 <div class="ttc" id="amain_8cpp_html_acd7cf3c92a013e8e64c45ecd35fe8f93"><div class="ttname"><a href="#acd7cf3c92a013e8e64c45ecd35fe8f93">getTime</a></div><div class="ttdeci">String getTime(tm timeInfo)</div><div class="ttdoc">Returns the time in &quot;hh:mm&quot; format.</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00469">main.cpp:469</a></div></div>
 <div class="ttc" id="amain_8cpp_html_ae1bc6ee0bf39efb79c46ad44e1c67fc2"><div class="ttname"><a href="#ae1bc6ee0bf39efb79c46ad44e1c67fc2">appendToCSV</a></div><div class="ttdeci">bool appendToCSV(const char *path, String currentDate, String currentTime)</div><div class="ttdoc">Appends a value to a CSV file with current date and current time as parameter.</div><div class="ttdef"><b>Definition</b> <a href="main_8cpp_source.html#l00200">main.cpp:200</a></div></div>
@@ -1010,7 +1010,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="lineno">  547</span>      delay(1000); <span class="comment">// Retry every second</span></div>
 <div class="line"><span class="lineno">  548</span>      Serial.println(<span class="stringliteral">&quot;Waiting for time...&quot;</span>);</div>
 <div class="line"><span class="lineno">  549</span>    }</div>
-<div class="line"><span class="lineno">  550</span> </div>
+<div class="line"><span class="lineno">  550</span>    Serial.println(<span class="stringliteral">&quot;Retrieved Time&quot;</span>);</div>
 <div class="line"><span class="lineno">  551</span>    <span class="comment">// Initialize CORS headers for HTTP requests</span></div>
 <div class="line"><span class="lineno">  552</span>    DefaultHeaders::Instance().addHeader(<span class="stringliteral">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="stringliteral">&quot;*&quot;</span>);</div>
 <div class="line"><span class="lineno">  553</span>    DefaultHeaders::Instance().addHeader(<span class="stringliteral">&quot;Access-Control-Allow-Methods&quot;</span>, <span class="stringliteral">&quot;GET, POST, PUT, DELETE&quot;</span>);</div>
