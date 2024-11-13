@@ -18,7 +18,7 @@ Det her program kan bruges som en simulation af en sensor som tæller hvor mange
 ## 2. Materials
 Her er der en liste af alle de komponenter der blir brugt.
 
-    1 Arduino Mega 2650
+    1 ESP32
     1 Breadboard
     1 Ledning
     1 Sølvpapir
